@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <meta name="Pablo Rangel" content="Sistema de Gerência de Vendas (SisGerV)"></meta>
+        <title>SisGerV</title>
+    </h:head>
+
+    <h:body>
+        <b:form>
+            <b:navBar brand="SisGerV" brandHref="index.xhtml" fixed="top" inverse="true">
+                <b:navbarLinks>
+                    <b:dropMenu value="Gerenciar">
+                        <b:navCommandLink value="Produtos" action="/gerenciar_produto?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Física" action="/gerenciar_pessoa_fisica?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Jurídica" action="/gerenciar_pessoa_juridica?faces-redirect=true"></b:navCommandLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
+        </b:form>
+        <b:container fluid="true" style="padding-top: 60px; padding-left: 10%; padding-right: 10%; font-size: smaller;" >
+            <b:form>
+                <b:panel title="Lista de Clientes" look="primary"  showCollapseLink="false">
+                    <b:dataTable id="tabelaClientes" value="#{controladorGerenciarPessoaFisica.listar()}" 
+                                 var="cliente"
+                                 page-length="5"
+                                 page-length-menu="5,10,20"
+                                 customLangUrl="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+                                 responsive="true"
+                                 select="true">
+                        <b:dataTableColumn label="Nome" value="#{cliente.nome}" order = "asc"/>
+                        <b:dataTableColumn label="CPF" value="#{cliente.cpf}" />
+                        <b:dataTableColumn label="Alterar"> 
+                            <b:commandButton ajax="true" tooltip="Altere este registro" look="warning" action="/inserir_alterar_pessoa_fisica?faces-redirect=true" actionListener="#{controladorGerenciarPessoaFisica.setModelo(cliente)}">
+                                <b:iconAwesome name="edit"></b:iconAwesome>
+                            </b:commandButton>
+                        </b:dataTableColumn>
+                        <b:dataTableColumn label="Excluir">
+                            <b:commandButton update="@form" ajax="true" tooltip="Exclua este registro" look="danger" process="@this" immediate="true" action="#{controladorGerenciarPessoaFisica.excluir()}" actionListener="#{controladorGerenciarPessoaFisica.setModelo(cliente)}">
+                                <b:iconAwesome name="trash"></b:iconAwesome>
+                            </b:commandButton>
+                        </b:dataTableColumn>
+                    </b:dataTable>
+                    <f:facet name="footer">
+                        <p style="text-align: right"> 
+                            <b:commandButton value="Adicionar novo registro... " ajax="true" tooltip="Adicione um novo registro" look="success" action="/inserir_alterar_pessoa_fisica?faces-redirect=true" actionListener="#{controladorGerenciarPessoaFisica.setModelo(null)}">
+                                <b:iconAwesome name="plus"></b:iconAwesome>
+                            </b:commandButton>
+                        </p>
+                    </f:facet>
+                </b:panel>
+            </b:form>
+        </b:container>
+    </h:body>
+</html>
+

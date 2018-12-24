@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <meta name="Pablo Rangel" content="Sistema de Gerência de Vendas (SisGerV)"></meta>
+        <title>SisGerV</title>
+    </h:head>
+
+    <h:body>
+        <b:form>
+            <b:navBar brand="SisGerV" brandHref="index.xhtml" fixed="top" inverse="true">
+                <b:navbarLinks>
+                    <b:dropMenu value="Gerenciar">
+                        <b:navCommandLink value="Produtos" action="/gerenciar_produto?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Física" action="/gerenciar_pessoa_fisica?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Jurídica" action="/gerenciar_pessoa_juridica?faces-redirect=true"></b:navCommandLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
+        </b:form>
+        <b:container fluid="true" style="padding-top: 60px; padding-left: 35%; padding-right: 35%" >
+            <b:form id="formProduto">
+                <b:panel title="Editar Produto" look="primary"  showCollapseLink="false"> 
+                    <b:row>
+                        <b:column>
+                            <b:inputText id="nome" label="Nome" value="#{controladorGerenciarProduto.modelo.nome}" placeholder="Entre com o nome do produto" rendered="true" required="true" required-message="O nome do produto é obrigatório" autocomplete="true"> </b:inputText>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column>
+                            <b:inputText id="valor" label="Valor" value="#{controladorGerenciarProduto.modelo.valor}" placeholder="Entre com o valor do produto"  rendered="true" required="true" required-message="O valor do produto é obrigatório" mask="numeric">
+                                <f:facet name="prepend">
+                                    <h:outputText value="R$" />
+                                </f:facet>
+                                <f:facet name="append">
+                                    <h:outputText value="reais" />
+                                </f:facet>
+                            </b:inputText>
+                        </b:column>
+                    </b:row>
+                    <f:facet name="footer">
+                        <b:row >
+                            <b:column offset="2" span="2">
+                                <b:commandButton value="Salvar" iconAwesome="save" ajax="true" tooltip="Salve os dados" look="primary" actionListener="#{controladorGerenciarProduto.salvar(controladorGerenciarProduto.modelo.idProduto)}" update="@form"/>
+                            </b:column>
+                            <b:column offset="2" span="2">
+                                <b:commandButton immediate="true" value="Fechar" iconAwesome="close" ajax="false" tooltip="Fecha este formulário e volta para a tela anterior." look="primary" action="/gerenciar_produto?faces-redirect=true" />
+                            </b:column>
+                        </b:row>
+                    </f:facet>
+                </b:panel>
+                <b:well id="mensagem" styleClass="message-well" style="margin-top:10px">
+                    <b:message for="nome"/>
+                    <b:message for="valor"/>
+                    <p>#{controladorGerenciarProduto.getMensagem()}</p>
+                </b:well>
+            </b:form>
+        </b:container>
+
+    </h:body>
+</html>
+
+
+

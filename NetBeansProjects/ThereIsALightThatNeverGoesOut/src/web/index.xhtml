@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <meta name="Pablo Rangel" content="Sistema de Gerência de Vendas (SisGerV) "></meta>
+        <title>SisGerV</title>
+    </h:head>
+
+    <h:body>
+        <b:form>
+            <b:navBar brand="SisGerV" fixed="top" inverse="true">
+                <b:navbarLinks>
+                    <b:dropMenu value="Gerenciar">
+                        <b:navCommandLink value="Produtos" action="/gerenciar_produto?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Física" action="/gerenciar_pessoa_fisica?faces-redirect=true"></b:navCommandLink>
+                        <b:navCommandLink value="Clientes - Pessoa Jurídica" action="/gerenciar_pessoa_juridica?faces-redirect=true"></b:navCommandLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
+        </b:form>
+
+    </h:body>
+</html>
+
